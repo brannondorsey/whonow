@@ -28,5 +28,8 @@
     "chalk": "^2.3.2",
     "loglevel": "^1.6.1",
     "native-dns": "^0.7.0"
+  },
+  "devDependencies": {
+    "uuid": "^3.2.1"
   }
 }

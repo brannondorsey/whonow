@@ -1,11 +1,7 @@
 const ipRegex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
 
+class DomainRebind {
 
-class Client {
-
-    // ntimes
-    // forever
-    // repeat
     constructor(domain) {
         this.domain = domain
         this.program = this.parseProgram(this.domain)
@@ -35,10 +31,12 @@ class Client {
         return instruction.ip
     }
 
+    // ntimes
+    // forever
+    // repeat
     parseProgram(domain) {
 
         const labels = domain.toLowerCase().split('.')
-
         const instructions = []
 
         if (labels.length < 1) return []
@@ -91,4 +89,4 @@ class Client {
     }
 }
 
-module.exports = Client
+module.exports = DomainRebind
