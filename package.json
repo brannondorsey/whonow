@@ -15,7 +15,9 @@
     "dns",
     "dns server",
     "hacking",
-    "penetration testing"
+    "penetration testing",
+    "same-origin policy",
+    "red team"
   ],
   "author": "Brannon Dorsey",
   "license": "MIT",
