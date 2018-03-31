@@ -1,0 +1,32 @@
+{
+  "name": "dnsliar",
+  "version": "1.0.0",
+  "description": "A malicious DNS server for executing DNS Rebinding attacks on the fly.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brannondorsey/liar.git"
+  },
+  "keywords": [
+    "dns rebinding",
+    "dns",
+    "dns server",
+    "hacking",
+    "penetration testing"
+  ],
+  "author": "Brannon Dorsey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brannondorsey/liar/issues"
+  },
+  "homepage": "https://github.com/brannondorsey/liar#readme",
+  "dependencies": {
+    "argparse": "^1.0.10",
+    "chalk": "^2.3.2",
+    "loglevel": "^1.6.1",
+    "native-dns": "^0.7.0"
+  }
+}
