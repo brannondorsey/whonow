@@ -86,7 +86,7 @@ To run your own `whonow` server in the cloud use your domain name provider's adm
 
 ```bash
 # install
-npm install -g whonow
+npm install --cli -g whonow@latest
 
 # run it!
 whonow --port 53
