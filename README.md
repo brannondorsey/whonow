@@ -1,9 +1,9 @@
 # Whonow DNS Server
 
-A malicious DNS server for executing [DNS Rebinding attacks](https://en.wikipedia.org/wiki/DNS_rebinding) on the fly. `whonow` lets you specify DNS responses and rebind rules dynamically *using domain requests themselves*. 
+A malicious DNS server for executing [DNS Rebinding attacks](https://en.wikipedia.org/wiki/DNS_rebinding) on the fly. `whonow` lets you specify DNS responses and rebind rules dynamically *using domain requests themselves*.
 
 ```bash
-# respond to DNS queries for this domain with 52.23.194.42 the first time 
+# respond to DNS queries for this domain with 52.23.194.42 the first time
 # it is requested and then 192.168.1.1 every time after that
 A.52.23.194.42.1time.192.168.1.1.forever.rebind.network
 
@@ -66,7 +66,7 @@ Additionally, there may not be more than 127 labels/subdomains.
 
 ### Use Unique Domain Names
 
-Each unique domain name request to `whonow` creates a small state-saving program in the server's RAM. The next time that domain name is requested the program counter increments and the state may be mutated. **All unique domain names are their own unique program instances**. To avoid clashing with other users or having your domain name program's state inadvertently incremented you should add a UUID subdomain after your rule definitions. That UUID should never be reused. 
+Each unique domain name request to `whonow` creates a small state-saving program in the server's RAM. The next time that domain name is requested the program counter increments and the state may be mutated. **All unique domain names are their own unique program instances**. To avoid clashing with other users or having your domain name program's state inadvertently incremented you should add a UUID subdomain after your rule definitions. That UUID should never be reused.
 
 ```
 # this
@@ -82,7 +82,7 @@ The program state associated with each unique domain name is stored by `whonow` 
 
 ## Running your own `whonow` server
 
-To run your own `whonow` server in the cloud use your domain name provider's admin panel to configure a custom nameserver pointing to your VPS. Then install `whonow` on that VPS and make sure it's running on port 53 (the default DNS port) and that port 53 is accessible to the Internet. 
+To run your own `whonow` server in the cloud use your domain name provider's admin panel to configure a custom nameserver pointing to your VPS. Then install `whonow` on that VPS and make sure it's running on port 53 (the default DNS port) and that port 53 is accessible to the Internet.
 
 ```bash
 # install
@@ -91,6 +91,8 @@ npm install --cli -g whonow@latest
 # run it!
 whonow --port 53
 ```
+
+![whonow screenshot](.images/screenshot.png)
 
 If that ☝ is too much trouble, feel free to just use the public `whonow` server running on [`rebind.network`](http://rebind.network) 🌐.
 
@@ -107,15 +109,15 @@ Optional arguments:
   -v, --version         Show program's version number and exit.
   -p PORT, --port PORT  What port to run the DNS server on (default: 53).
   -d DEFAULT_ANSWER, --default-answer DEFAULT_ANSWER
-                        The default IP address to respond with if no rule is 
+                        The default IP address to respond with if no rule is
                         found (default: "127.0.0.1").
   -b MAX_RAM_DOMAINS, --max-ram-domains MAX_RAM_DOMAINS
-                        The number of domain name records to store in RAM at 
-                        once. Once the number of unique domain names queried 
-                        surpasses this number domains will be removed from 
-                        memory in the order they were requested. Domains that 
-                        have been removed in this way will have their program 
-                        state reset the next time they are queried (default: 
+                        The number of domain name records to store in RAM at
+                        once. Once the number of unique domain names queried
+                        surpasses this number domains will be removed from
+                        memory in the order they were requested. Domains that
+                        have been removed in this way will have their program
+                        state reset the next time they are queried (default:
                         10000000).
 ```
 
@@ -133,4 +135,3 @@ whonow -p 15353
 cd path/to/node_modules/whonow
 npm test
 ```
-
