@@ -20,35 +20,34 @@ function main() {
     const orderedDomains = new Set()
 
     server.on('request', (request, response) => {
-      
+
         request.question.forEach(question => {
 
-            const domain = question.name
-            
-            if (!domains.hasOwnProperty(domain)) {
-                domains[domain] = new DomainRebind(domain)
-                orderedDomains.add(domain)
-                if (orderedDomains.size > args['max_client_records']) {
-                    // remove the oldest client from the set and dict
-                    const oldest = orderedDomains.values().next().value
-                    orderedDomains.delete(oldest)
-                    delete domains[oldest]
+            // only handle A queries for now
+            if (question.type == dns.consts.NAME_TO_QTYPE.A) {
+
+                const domain = question.name
+
+                if (!domains.hasOwnProperty(domain)) {
+                    domains[domain] = new DomainRebind(domain)
+                    orderedDomains.add(domain)
+                    if (orderedDomains.size > args['max_client_records']) {
+                        // remove the oldest client from the set and dict
+                        const oldest = orderedDomains.values().next().value
+                        orderedDomains.delete(oldest)
+                        delete domains[oldest]
+                    }
                 }
-            }
 
-            const address = domains[domain].next()
+                const address = domains[domain].next()
 
-            let answer = {
-                name: domain,
-                address: address || args['default_answer'],
-                ttl: 1
-            }
+                let answer = {
+                    name: domain,
+                    address: address || args['default_answer'],
+                    ttl: 1
+                }
 
-            // only handle A for now
-            switch(question.type) {
-                case dns.consts.NAME_TO_QTYPE.A:
-                    response.answer.push(dns.A(answer))
-                    break
+                response.answer.push(dns.A(answer))
             }
         })
 
