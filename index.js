@@ -91,7 +91,7 @@ function parseArgs() {
     parser.addArgument(
       [ '-p', '--port' ],
       {
-        help: 'what port to run the dns server on (default: 53).',
+        help: 'What port to run the DNS server on (default: 53).',
         defaultValue: 53
       }
     )
@@ -99,7 +99,7 @@ function parseArgs() {
     parser.addArgument(
       [ '-d', '--default-answer' ],
       {
-        help: 'default IP address to respond with if not rule is found (default: "127.0.0.1").',
+        help: 'The default IP address to respond with if no rule is found (default: "127.0.0.1").',
         defaultValue: '127.0.0.1'
       }
     )

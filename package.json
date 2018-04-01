@@ -1,5 +1,5 @@
 {
-  "name": "dnsliar",
+  "name": "whonow",
   "version": "1.0.0",
   "description": "A malicious DNS server for executing DNS Rebinding attacks on the fly.",
   "main": "index.js",
