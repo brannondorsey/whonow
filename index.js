@@ -52,7 +52,7 @@ function main() {
 
         if (response.answer.length > 0) {
             response.answer.forEach(ans => {
-                log.info(c.blue('[+]') + ` A ${c.cyan(ans.address)} ${ans.name}`)
+                log.info(c.blue('[+]') + ` A ${c.cyan(ans.address.padEnd(15))} ${ans.name}`)
             })
         }
 
