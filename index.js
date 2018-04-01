@@ -55,6 +55,9 @@ function main() {
             response.answer.forEach(ans => {
                 log.info(c.blue('[+]') + ` A ${c.cyan(ans.address.padEnd(15))} ${ans.name}`)
             })
+        } else {
+            // silently responding to non-A requests with an empty response packet
+            // could print here for debugging
         }
 
         response.send()

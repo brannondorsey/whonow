@@ -1,5 +1,11 @@
 # Whonow Changelog
 
+# v1.1.1
+
+- Fix bug that was causing all domain queries to affect the program state of A rebind rules, not just A requests themselves.
+- Add a few tests
+- Fix Github urls in `package.json`
+
 # v1.1.0
 
 - Package can now be installed globally with `npm install --cli -g whonow@latest`
