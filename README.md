@@ -12,7 +12,7 @@ A.52.23.194.42.1time.192.168.1.1.forever.rebind.network
 A.52.23.194.42.1time.192.168.1.1.5times.repeat.rebind.network
 ```
 
-What's great about dynamic DNS Rebinding rules is that you don't have to spin up your own malicous DNS server to start exploiting the browser's [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy). Instead, everyone can share the same [public `whonow` server](http://rebind.network).
+What's great about dynamic DNS Rebinding rules is that you don't have to spin up your own malicious DNS server to start exploiting the browser's [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy). Instead, everyone can share the same [public `whonow` server](http://rebind.network).
 
 **Note**: You should include UUIDs (e.g. `a06a5856-1fff-4415-9aa2-823230b05826
 `) as a subdomain in each DNS lookup to a `whonow` server. These have been omitted from examples in this README for brevity, but assume requests to `*.rebind.network` should be `*.a06a5856-1fff-4415-9aa2-823230b05826.rebind.network`. See the [Gotchas](#gotchas) section for more info as to why.
@@ -32,8 +32,8 @@ A.<ip-address>.<rule>[.<ip-address>.<rule>[.<ip-address>.<rule>]][.uuid/random-s
 - `<rule>`: One of three rules
 	- `(n)time[s]`: The number of times the DNS server should reply with the previous IP address. Accepts both plural and singular strings (e.g. `1time, 3times, 5000times`)
 	- `forever`: Respond with the previous IP address forever.
-	- `repeat`: Repeat the entire set of rules starting from the begining.
-- `[uuid/random-string]`: A random string to keep DNS Rebind attacks against the same IP addresses seperate from eachother. See [Gotchas](#gotchas) for more info.
+	- `repeat`: Repeat the entire set of rules starting from the beginning.
+- `[uuid/random-string]`: A random string to keep DNS Rebind attacks against the same IP addresses separate from each other. See [Gotchas](#gotchas) for more info.
 - `example.com`: A domain name you have pointing to a `whonow` nameserver, like the publicly available `rebind.network` `whonow` instance.
 
 Rules can be chained together to form complex response behavior.
@@ -78,11 +78,11 @@ A.127.0.0.1.1time.10.0.0.1.1time.repeat.rebind.network
 
 ### `--max-ram-domains`
 
-The program state assosciated with each unique domain name is stored by `whonow` in RAM. To avoid running out of RAM an upper-bound is placed on the number of unique domains who's program state can be managed at the same time. By default, this value is set to 10,000,000, but can be configured with the `--max-ram-domains`. Once this limit is reached, domain names and their saved program state will be removed in the order they were added (FIFO).
+The program state associated with each unique domain name is stored by `whonow` in RAM. To avoid running out of RAM an upper-bound is placed on the number of unique domains who's program state can be managed at the same time. By default, this value is set to 10,000,000, but can be configured with the `--max-ram-domains`. Once this limit is reached, domain names and their saved program state will be removed in the order they were added (FIFO).
 
 ## Running your own `whonow` server
 
-To run your own `whonow` server in the cloud use your domain name provider's admin panel to configure a custom nameserver pointing to your VPS. Then install `whonow` on that VPS and make sure it's running on port 53 (the default DNS port) and that port 53 is accessible to the internet. 
+To run your own `whonow` server in the cloud use your domain name provider's admin panel to configure a custom nameserver pointing to your VPS. Then install `whonow` on that VPS and make sure it's running on port 53 (the default DNS port) and that port 53 is accessible to the Internet. 
 
 ```bash
 # install
