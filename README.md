@@ -12,7 +12,7 @@ A.52.23.194.42.1time.192.168.1.1.forever.rebind.network
 A.52.23.194.42.1time.192.168.1.1.5times.repeat.rebind.network
 ```
 
-What's great about dynamic DNS Rebinding rules is that you don't have to spin up your own malicious DNS server to start exploiting the browser's [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy). Instead, everyone can share the same [public `whonow` server](http://rebind.network).
+What's great about dynamic DNS Rebinding rules is that you don't have to spin up your own malicious DNS server to start exploiting the browser's [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy). Instead, everyone can share the same public `whonow` server running on port 53 of `rebind.network`.
 
 **Note**: You should include UUIDs (e.g. `a06a5856-1fff-4415-9aa2-823230b05826
 `) as a subdomain in each DNS lookup to a `whonow` server. These have been omitted from examples in this README for brevity, but assume requests to `*.rebind.network` should be `*.a06a5856-1fff-4415-9aa2-823230b05826.rebind.network`. See the [Gotchas](#gotchas) section for more info as to why.
@@ -34,7 +34,7 @@ A.<ip-address>.<rule>[.<ip-address>.<rule>[.<ip-address>.<rule>]][.uuid/random-s
 	- `forever`: Respond with the previous IP address forever.
 	- `repeat`: Repeat the entire set of rules starting from the beginning.
 - `[uuid/random-string]`: A random string to keep DNS Rebind attacks against the same IP addresses separate from each other. See [Gotchas](#gotchas) for more info.
-- `example.com`: A domain name you have pointing to a `whonow` nameserver, like the publicly available `rebind.network` `whonow` instance.
+- `example.com`: A domain name you have pointing to a `whonow` nameserver, like the publicly available `rebind.network:53` `whonow` instance.
 
 Rules can be chained together to form complex response behavior.
 
@@ -94,7 +94,7 @@ whonow --port 53
 
 ![whonow screenshot](.images/screenshot.png)
 
-If that ☝ is too much trouble, feel free to just use the public `whonow` server running on [`rebind.network`](http://rebind.network) 🌐.
+If that ☝ is too much trouble, feel free to just use the public `whonow` server running on port 53 of `rebind.network`.🌐.
 
 ## Usage
 
