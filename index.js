@@ -26,7 +26,7 @@ function main() {
             // only handle A queries for now
             if (question.type == dns.consts.NAME_TO_QTYPE.A) {
 
-                const domain = question.name
+                const domain = question.name.toLowerCase()
 
                 if (!domains.hasOwnProperty(domain)) {
                     domains[domain] = new DomainRebind(domain)
@@ -42,7 +42,7 @@ function main() {
                 const address = domains[domain].next()
 
                 let answer = {
-                    name: domain,
+                    name: question.name, // respond with original name
                     address: address || args['default_answer'],
                     ttl: 1
                 }

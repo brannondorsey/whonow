@@ -1,5 +1,9 @@
 # Whonow Changelog
 
+# v1.1.2
+
+- Unique domain names and their program state are now case-insensitive.
+
 # v1.1.1
 
 - Fix bug that was causing all domain queries to affect the program state of A rebind rules, not just A requests themselves.
