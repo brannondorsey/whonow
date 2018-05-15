@@ -17,6 +17,8 @@ What's great about dynamic DNS Rebinding rules is that you don't have to spin up
 **Note**: You should include UUIDs (e.g. `a06a5856-1fff-4415-9aa2-823230b05826
 `) as a subdomain in each DNS lookup to a `whonow` server. These have been omitted from examples in this README for brevity, but assume requests to `*.rebind.network` should be `*.a06a5856-1fff-4415-9aa2-823230b05826.rebind.network`. See the [Gotchas](#gotchas) section for more info as to why.
 
+**DISCLAIMER: This software is for educational purposes only. This software should not be used for illegal activity. The author is not responsible for its use. Don't be a dick.**
+
 ## Subdomains = Rebind Rules
 
 The beauty of `whonow` is that you can define the behavior of DNS responses via subdomains in the domain name itself. Using only a few simple keywords: `A`, `(n)times`, `forever`, and `repeat`, you can define complex and powerful DNS behavior.
