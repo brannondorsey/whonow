@@ -1,5 +1,10 @@
 # Whonow Changelog
 
+# v1.2.0
+
+- Add CSV logging with `--logfile`. 
+- More logging to stdout with `--verbose`.
+
 # v1.1.2
 
 - Unique domain names and their program state are now case-insensitive.
