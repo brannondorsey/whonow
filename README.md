@@ -92,6 +92,9 @@ npm install --cli -g whonow@latest
 
 # run it!
 whonow --port 53
+
+# you can also run it with more logging to stdout and save DNS activity to CSV
+whonow --port 53 --logfile log.csv --verbose
 ```
 
 ![whonow screenshot](.images/screenshot.png)
@@ -103,6 +106,8 @@ If that ☝ is too much trouble, feel free to just use the public `whonow` serve
 ```
 $ whonow --help
 usage: whonow [-h] [-v] [-p PORT] [-d DEFAULT_ANSWER] [-b MAX_RAM_DOMAINS]
+              [-l LOGFILE] [-m]
+              
 
 A malicious DNS server for executing DNS Rebinding attacks on the fly.
 
@@ -111,16 +116,20 @@ Optional arguments:
   -v, --version         Show program's version number and exit.
   -p PORT, --port PORT  What port to run the DNS server on (default: 53).
   -d DEFAULT_ANSWER, --default-answer DEFAULT_ANSWER
-                        The default IP address to respond with if no rule is
+                        The default IP address to respond with if no rule is 
                         found (default: "127.0.0.1").
   -b MAX_RAM_DOMAINS, --max-ram-domains MAX_RAM_DOMAINS
-                        The number of domain name records to store in RAM at
-                        once. Once the number of unique domain names queried
-                        surpasses this number domains will be removed from
-                        memory in the order they were requested. Domains that
-                        have been removed in this way will have their program
-                        state reset the next time they are queried (default:
+                        The number of domain name records to store in RAM at 
+                        once. Once the number of unique domain names queried 
+                        surpasses this number domains will be removed from 
+                        memory in the order they were requested. Domains that 
+                        have been removed in this way will have their program 
+                        state reset the next time they are queried (default: 
                         10000000).
+  -l LOGFILE, --logfile LOGFILE
+                        Log to CSV file (default: false)
+  -m, --verbose         Log request timestamp and sender IP address to stdout 
+                        (default: false)
 ```
 
 ## Testing
