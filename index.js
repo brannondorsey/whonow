@@ -14,7 +14,18 @@ function main() {
 
     const args = parseArgs()
     log.setDefaultLevel('info')
-    log.setLevel('debug')
+
+    if (args.logfile) {
+        try {
+            fs.writeFileSync(args.logfile, 'timestamp,src_ip,question_type,question,answer\n')
+            log.info(c.gray('[*]') + ` logging CSV data to ${args.logfile}`)
+        } catch (err) {
+            log.error(c.red('[!]') + ` error writing to --logfile ${args.logfile}:`)
+            log.error(err)
+            log.error(c.red('[!]') + ' exiting.')
+            process.exit(1)
+        }
+    }
 
     const domains = {}
     const orderedDomains = new Set()
@@ -53,7 +64,39 @@ function main() {
 
         if (response.answer.length > 0) {
             response.answer.forEach(ans => {
-                log.info(c.blue('[+]') + ` A ${c.cyan(ans.address.padEnd(15))} ${ans.name}`)
+
+                const src = `${request.address.address}:${request.address.port}`
+
+                if (args.logfile) {
+
+                    // 'timestamp,src_ip,question_type,question,answer'
+                    let line = Date.now() + ','
+                    line += src + ','
+                    line += 'A,'
+                    line += ans.name + ','
+                    line += ans.address + '\n'
+
+                    // WARNING: because these calls are async, requests may be
+                    // logged out of order. This shouldn't be a problem though
+                    // as the csv can be sorted by timestamp
+                    fs.appendFile(args.logfile, line, (err) => {
+                        if (err) {
+                            log.error(c.red('[!]') + ` error writing to ${args.logfile}`)
+                            log.error(err)
+                        }
+                    })
+                }
+
+                if (args.verbose) {
+                    // time in ISO date format string
+                    // https://docs.microsoft.com/en-us/scripting/javascript/date-and-time-strings-javascript#iso-date-format
+                    const time = c.yellow(new Date().toISOString())
+                    const answer = c.cyan(ans.address.padEnd(15))
+                    const address = c.magenta(src.padEnd(21))
+                    log.info(c.blue('[+]') + ` ${time} ${address} A ${answer} ${ans.name}`)
+                } else {
+                    log.info(c.blue('[+]') + ` A ${c.cyan(ans.address.padEnd(15))} ${ans.name}`)
+                }
             })
         } else {
             // silently responding to non-A requests with an empty response packet
@@ -122,6 +165,20 @@ function parseArgs() {
       }
     )
 
+    parser.addArgument(
+        [ '-l', '--logfile' ],
+        {
+            help: 'Log to CSV file (default: false)'
+        }
+    )
+
+    parser.addArgument(
+        [ '-m', '--verbose' ],
+        {
+            help: 'Log request timestamp and sender IP address to stdout (default: false)',
+            action: 'storeTrue'
+        }
+    )
     return parser.parseArgs()
 }
 
