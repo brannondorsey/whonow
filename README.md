@@ -3,13 +3,13 @@
 A malicious DNS server for executing [DNS Rebinding attacks](https://en.wikipedia.org/wiki/DNS_rebinding) on the fly. `whonow` lets you specify DNS responses and rebind rules dynamically *using domain requests themselves*.
 
 ```bash
-# respond to DNS queries for this domain with 52.23.194.42 the first time
+# respond to DNS queries for this domain with 34.192.228.43 the first time
 # it is requested and then 192.168.1.1 every time after that
-A.52.23.194.42.1time.192.168.1.1.forever.rebind.network
+A.34.192.228.43.1time.192.168.1.1.forever.rebind.network
 
-# respond first with 52.23.194.42, then 192.168.1.1 the next five times,
+# respond first with 34.192.228.43, then 192.168.1.1 the next five times,
 # and then start all over again (1, then 5, forever...)
-A.52.23.194.42.1time.192.168.1.1.5times.repeat.rebind.network
+A.34.192.228.43.1time.192.168.1.1.5times.repeat.rebind.network
 ```
 
 What's great about dynamic DNS Rebinding rules is that you don't have to spin up your own malicious DNS server to start exploiting the browser's [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy). Instead, everyone can share the same public `whonow` server running on port 53 of `rebind.network`.
@@ -53,9 +53,9 @@ A.127.0.0.1.1time.10.0.0.1.1time.repeat.rebind.network
 # first respond with 192.168.1.1 then 192.168.1.2. Now respond 192.168.1.3 forever.
 A.192.168.1.1.1time.192.168.1.2.2times.192.168.1.3.forever.rebind.network
 
-# respond with 52.23.194.42 the first time, then whatever `whonow --default-address`
+# respond with 34.192.228.43 the first time, then whatever `whonow --default-address`
 # is set to forever after that (default: 127.0.0.1)
-A.52.23.194.42.1time.rebind.network
+A.34.192.228.43.1time.rebind.network
 ```
 
 ### Limitations
