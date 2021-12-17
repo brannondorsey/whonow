@@ -55,7 +55,7 @@ function main() {
                 let answer = {
                     name: question.name, // respond with original name
                     address: address || args['default_answer'],
-                    ttl: 1
+                    ttl: args.ttl
                 }
 
                 response.answer.push(dns.A(answer))
@@ -130,53 +130,54 @@ function parseArgs() {
 
     const package = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json')))
     const parser = new ArgumentParser({
-      prog: package.name,
-      version: package.version,
-      description: package.description
+        prog: package.name,
+            version: package.version,
+            description: package.description
     })
 
     parser.addArgument(
-      [ '-p', '--port' ],
-      {
-        help: 'What port to run the DNS server on (default: 53).',
-        defaultValue: 53
-      }
+        ['-p', '--port'], {
+            help: 'What port to run the DNS server on (default: 53).',
+            defaultValue: 53
+        }
     )
 
     parser.addArgument(
-      [ '-d', '--default-answer' ],
-      {
-        help: 'The default IP address to respond with if no rule is found (default: "127.0.0.1").',
-        defaultValue: '127.0.0.1'
-      }
+        ['-d', '--default-answer'], {
+            help: 'The default IP address to respond with if no rule is found (default: "127.0.0.1").',
+            defaultValue: '127.0.0.1'
+        }
     )
 
-    let message =  'The number of domain name records to store in RAM at once. '
-        message += 'Once the number of unique domain names queried surpasses this number '
-        message += 'domains will be removed from memory in the order they were '
-        message += 'requested. Domains that have been removed in this way will '
-        message += 'have their program state reset the next time they are queried '
-        message += '(default: 10000000).'
+let message = 'The number of domain name records to store in RAM at once. '
+message += 'Once the number of unique domain names queried surpasses this number '
+message += 'domains will be removed from memory in the order they were '
+message += 'requested. Domains that have been removed in this way will '
+message += 'have their program state reset the next time they are queried '
+message += '(default: 10000000).'
     parser.addArgument(
-      [ '-b', '--max-ram-domains' ],
-      {
-        help: message,
-        defaultValue: 10000000
-      }
+        ['-b', '--max-ram-domains'], {
+            help: message,
+            defaultValue: 10000000
+        }
     )
-
     parser.addArgument(
         [ '-l', '--logfile' ],
         {
             help: 'Log to CSV file (default: false)'
         }
     )
-
     parser.addArgument(
         [ '-m', '--verbose' ],
         {
             help: 'Log request timestamp and sender IP address to stdout (default: false)',
             action: 'storeTrue'
+        }
+    )
+    parser.addArgument(
+        ['-t', '--ttl'], {
+            help: 'Set the TTL (in seconds) for each DNS reply (default: 1)',
+            defaultValue: 1
         }
     )
     return parser.parseArgs()
